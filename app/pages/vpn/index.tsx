@@ -50,6 +50,7 @@ export default function index() {
           <MenuItem value={'DE'}>Deutschland</MenuItem>
           <MenuItem value={'CA'}>Kanada</MenuItem>
           <MenuItem value={'US'}>USA</MenuItem>
+          <MenuItem value={'test'}>test</MenuItem>
         </Select>
         <Button onClick={changeCountryPost}>Switch VPN</Button>
       </Container>
