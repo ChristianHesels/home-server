@@ -9,16 +9,12 @@ export default function handler(
 ) {
   if (req.method === 'POST') {
     const country = req.body.country;
-    if (country !== 'test') {
-      exec('./scripts/switch_vpn.sh ' + country, (error, stdout, stderr) => {
-        if (error !== null) {
-          res.status(400).json({error: error});
-        } else {
-          res.status(200).json({country: country});
-        }
-      });
-    } else {
-      res.status(200).json({country: country});
-    }
+    exec('./scripts/switch_vpn.sh ' + country, (error, stdout, stderr) => {
+      if (error !== null) {
+        res.status(400).json({error: error});
+      } else {
+        res.status(200).json({country: country});
+      }
+    });
   }
 }
