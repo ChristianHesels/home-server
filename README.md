@@ -1,10 +1,5 @@
 <a name="readme-top"></a>
 
-
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -138,16 +133,3 @@ Project Link: [https://github.com/ChristianHesels/Home-Server](https://github.co
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[issues-shield]: https://img.shields.io/github/issues/christianhesels/home-server.svg?style=for-the-badge
-[issues-url]: https://github.com/christianhesels/home-server/issues
-[license-shield]: https://img.shields.io/github/license/christianhesels/home-server.svg?style=for-the-badge
-[license-url]: https://github.com/christianhesels/home-server/blob/main/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/christian-hesels-347b101a0/
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
