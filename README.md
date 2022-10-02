@@ -1,11 +1,6 @@
 <a name="readme-top"></a>
 
 
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -146,12 +141,6 @@ Project Link: [https://github.com/ChristianHesels/Home-Server](https://github.co
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/christianhesels/home-server.svg?style=for-the-badge
-[contributors-url]: https://github.com/ChristianHesels/Home-Server/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/christianhesels/home-server.svg?style=for-the-badge
-[forks-url]: https://github.com/christianhesels/home-server/network/members
-[stars-shield]: https://img.shields.io/github/stars/christianhesels/home-server.svg?style=for-the-badge
-[stars-url]: https://github.com/christianhesels/home-server/stargazers
 [issues-shield]: https://img.shields.io/github/issues/christianhesels/home-server.svg?style=for-the-badge
 [issues-url]: https://github.com/christianhesels/home-server/issues
 [license-shield]: https://img.shields.io/github/license/christianhesels/home-server.svg?style=for-the-badge
