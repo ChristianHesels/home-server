@@ -1,6 +1,5 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
@@ -11,9 +10,7 @@ const Home: NextPage = () => {
         <title>Zuhause</title>
       </Head>
 
-      <main className={styles.main}>
-        <Link href="/vpn">Api</Link>
-      </main>
+      <main className={styles.main}></main>
 
       <footer className={styles.footer}>
         <a
