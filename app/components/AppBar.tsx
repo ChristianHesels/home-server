@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useId} from 'react';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -16,6 +16,7 @@ const navItems = [
 
 export default function AppBar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const listId = useId();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -36,17 +37,15 @@ export default function AppBar() {
           </IconButton>
           <Box sx={{display: {xs: 'none', sm: 'block'}}}>
             {navItems.map(item => (
-              <Link href={item.link}>
-                <Button key={item.name} sx={{color: '#fff'}}>
-                  {item.name}
-                </Button>
+              <Link key={listId + item.name} href={item.link}>
+                <Button sx={{color: '#fff'}}>{item.name}</Button>
               </Link>
             ))}
           </Box>
           <Drawer open={mobileOpen} onClose={() => setMobileOpen(false)}>
-            <List>
+            <List key={listId + 'mobile'}>
               {navItems.map(item => (
-                <Link href={item.link}>
+                <Link key={listId + 'mobile' + item.name} href={item.link}>
                   <ListItem button>
                     <ListItemText>{item.name}</ListItemText>
                   </ListItem>

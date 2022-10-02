@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import {Button, Container} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
+import {toast} from 'react-toastify';
 
 export default function index() {
   const [country, setCountry] = useState('DE');
@@ -19,9 +20,17 @@ export default function index() {
       body: JSON.stringify({country: country}),
     }).then(response => {
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        toast('Error switching Country', {
+          autoClose: 1000,
+          type: 'error',
+        });
       } else {
-        response.json().then(data => console.log(data));
+        response.json().then(data =>
+          toast('Switched to ' + data.country, {
+            autoClose: 1000,
+            type: 'success',
+          })
+        );
       }
     });
   };

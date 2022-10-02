@@ -1,7 +1,9 @@
 import '../styles/globals.css';
 import type {AppProps} from 'next/app';
+import 'react-toastify/dist/ReactToastify.css';
 import AppBar from '../components/AppBar';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
+import {ToastContainer} from 'react-toastify';
 
 const theme = createTheme({
   palette: {
@@ -21,12 +23,13 @@ const theme = createTheme({
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
-    <div>
+    <>
       <ThemeProvider theme={theme}>
         <AppBar />
         <Component {...pageProps} />
       </ThemeProvider>
-    </div>
+      <ToastContainer />
+    </>
   );
 }
 
