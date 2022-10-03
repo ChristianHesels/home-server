@@ -1,15 +1,19 @@
-.container {
-  padding: 0 2rem;
-}
-
 .main {
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: top;
   align-items: center;
+}
+
+.paper {
+  background-color: #1d1d1f;
+  color: white;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: justify;
 }
 
 .footer {

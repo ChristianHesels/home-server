@@ -1,29 +1,24 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Paper from '@mui/material/Paper';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Zuhause</title>
+        <title>Homeserver</title>
       </Head>
 
-      <main className={styles.main}></main>
+      <Paper className={styles.paper}>
+        <main className={styles.main}>
+          <h1>Homeserver</h1>
+          Project to access RaspAP and change NordVPN Connections,
+          Activate/Deactivate IP-Tables and more to come..
+        </main>
+      </Paper>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <footer className={styles.footer}>© Christian Hesels 2022</footer>
     </div>
   );
 };
