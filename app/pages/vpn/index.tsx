@@ -57,6 +57,28 @@ export default function Index() {
       }
     });
 
+  const reconnectPost = () =>
+    fetch('/api/vpn/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => {
+      if (!response.ok) {
+        toast('Error reconnecting VPN', {
+          autoClose: 1000,
+          type: 'error',
+        });
+      } else {
+        response.json().then(() =>
+          toast('VPN Reconnected', {
+            autoClose: 1000,
+            type: 'success',
+          })
+        );
+      }
+    });
+
   return (
     <div>
       <Paper className={styles.paper}>
@@ -82,6 +104,9 @@ export default function Index() {
           </Select>
           <Button variant="contained" onClick={changeCountryPost}>
             Switch VPN
+          </Button>
+          <Button variant="contained" onClick={reconnectPost}>
+            Reconnect
           </Button>
         </FormControl>
       </Paper>
