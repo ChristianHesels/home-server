@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
-import {Button, Container, FormControl, Paper} from '@mui/material';
+import {Button, FormControl, Paper} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
@@ -9,7 +9,7 @@ import {CountryListResponse, Country} from '../../interfaces/country';
 
 const countryFetcher = (url: string) => fetch(url).then(res => res.json());
 
-export default function index() {
+export default function Index() {
   const [country, setCountry] = useState('');
   const [countries, setCountries] = useState<[Country]>();
 
