@@ -46,7 +46,7 @@ export default function AppBar() {
             <List key={listId + 'mobile'}>
               {navItems.map(item => (
                 <Link key={listId + 'mobile' + item.name} href={item.link}>
-                  <ListItem button>
+                  <ListItem button onClick={handleDrawerToggle}>
                     <ListItemText>{item.name}</ListItemText>
                   </ListItem>
                 </Link>
