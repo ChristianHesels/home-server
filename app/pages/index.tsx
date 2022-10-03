@@ -11,14 +11,10 @@ const Home: NextPage = () => {
       </Head>
 
       <Paper className={styles.paper}>
-        <main className={styles.main}>
-          <h1>Homeserver</h1>
-          Project to access RaspAP and change NordVPN Connections,
-          Activate/Deactivate IP-Tables and more to come..
-        </main>
+        <h1>Homeserver</h1>
+        Project to access RaspAP and change NordVPN Connections,
+        Activate/Deactivate IP-Tables and more to come..
       </Paper>
-
-      <footer className={styles.footer}>© Christian Hesels 2022</footer>
     </div>
   );
 };

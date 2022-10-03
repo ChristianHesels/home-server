@@ -4,14 +4,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppBar from '../components/AppBar';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import {ToastContainer} from 'react-toastify';
+import styles from '../styles/Home.module.css';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#383838',
+      light: '#000000',
+      main: '#000000',
     },
     secondary: {
-      main: '#f5f5f5',
+      light: '#333333',
+      main: '#ffffff',
     },
   },
   mixins: {
@@ -27,6 +30,7 @@ function MyApp({Component, pageProps}: AppProps) {
       <ThemeProvider theme={theme}>
         <AppBar />
         <Component {...pageProps} />
+        <footer className={styles.footer}>© Christian Hesels 2022</footer>
       </ThemeProvider>
       <ToastContainer />
     </>

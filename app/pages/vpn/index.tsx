@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import {Button, Container} from '@mui/material';
+import {Button, Container, FormControl, Paper} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
+import styles from '../../styles/Home.module.css';
 
 export default function index() {
   const [country, setCountry] = useState('DE');
@@ -37,22 +38,27 @@ export default function index() {
 
   return (
     <div>
-      <Container>
+      <Paper className={styles.paper}>
         <h1> VPN Controller</h1>
-        <Select
-          labelId="select-country-id"
-          id="select-country"
-          color="secondary"
-          value={country}
-          label="Country"
-          onChange={handleChange}
-        >
-          <MenuItem value={'DE'}>Deutschland</MenuItem>
-          <MenuItem value={'CA'}>Kanada</MenuItem>
-          <MenuItem value={'US'}>USA</MenuItem>
-        </Select>
-        <Button onClick={changeCountryPost}>Switch VPN</Button>
-      </Container>
+        <FormControl variant="filled" sx={{m: 1, minWidth: 120}}>
+          <Select
+            labelId="select-country-id"
+            id="select-country"
+            color="secondary"
+            value={country}
+            label="Country"
+            onChange={handleChange}
+            className={styles.select}
+          >
+            <MenuItem value={'DE'}>Deutschland</MenuItem>
+            <MenuItem value={'CA'}>Kanada</MenuItem>
+            <MenuItem value={'US'}>USA</MenuItem>
+          </Select>
+          <Button variant="contained" onClick={changeCountryPost}>
+            Switch VPN
+          </Button>
+        </FormControl>
+      </Paper>
     </div>
   );
 }

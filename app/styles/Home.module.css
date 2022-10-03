@@ -1,26 +1,24 @@
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: center;
-}
-
 .paper {
   background-color: #1d1d1f;
   color: white;
-  padding-left: 30px;
-  padding-right: 30px;
+
+  padding: 2rem 0;
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
   text-align: justify;
+  padding-bottom: 30px;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
 }
 
 .footer {
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
@@ -131,3 +129,14 @@
     filter: invert(1);
   }
 }
+
+
+.select {
+    color: white;
+    
+}
+
+.select::before {
+  border-color: white;
+}
+
