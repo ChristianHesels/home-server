@@ -1,19 +1,44 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
 import {Button, Container, FormControl, Paper} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
+import {CountryListResponse, Country} from '../../interfaces/country';
+
+const countryFetcher = (url: string) => fetch(url).then(res => res.json());
 
 export default function index() {
-  const [country, setCountry] = useState('DE');
+  const [country, setCountry] = useState('');
+  const [countries, setCountries] = useState<[Country]>();
+
+  const {data, error} = useSWR<CountryListResponse, Error>(
+    '/api/vpn',
+    countryFetcher
+  );
+
+  useEffect(() => {
+    if (error) {
+      toast('Failed to load Country list', {
+        autoClose: 3000,
+        type: 'error',
+      });
+    }
+
+    if (data) {
+      toast('Loaded Country List', {autoClose: 1000, type: 'success'});
+      setCountries(data.countries);
+      console.log(data.countries);
+    }
+  }, [error, data]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCountry(event.target.value as string);
   };
 
   const changeCountryPost = () => {
-    const response = fetch('/api/vpn', {
+    const response = fetch('/api/vp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,9 +75,11 @@ export default function index() {
             onChange={handleChange}
             className={styles.select}
           >
-            <MenuItem value={'DE'}>Deutschland</MenuItem>
-            <MenuItem value={'CA'}>Kanada</MenuItem>
-            <MenuItem value={'US'}>USA</MenuItem>
+            {countries?.map(country => (
+              <MenuItem key={country.code} value={country.code}>
+                {country.name}
+              </MenuItem>
+            ))}
           </Select>
           <Button variant="contained" onClick={changeCountryPost}>
             Switch VPN
