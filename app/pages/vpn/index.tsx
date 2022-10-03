@@ -14,7 +14,7 @@ export default function index() {
   const [countries, setCountries] = useState<[Country]>();
 
   const {data, error} = useSWR<CountryListResponse, Error>(
-    '/api/vpn',
+    '/api/vpn/countries/',
     countryFetcher
   );
 
@@ -27,7 +27,6 @@ export default function index() {
     }
 
     if (data) {
-      toast('Loaded Country List', {autoClose: 1000, type: 'success'});
       setCountries(data.countries);
     }
   }, [error, data]);
@@ -36,13 +35,12 @@ export default function index() {
     setCountry(event.target.value as string);
   };
 
-  const changeCountryPost = () => {
-    const response = fetch('/api/vpn', {
+  const changeCountryPost = () =>
+    fetch('/api/vpn/countries/' + country, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({country: country}),
     }).then(response => {
       if (!response.ok) {
         toast('Error switching Country', {
@@ -58,7 +56,6 @@ export default function index() {
         );
       }
     });
-  };
 
   return (
     <div>
@@ -79,6 +76,9 @@ export default function index() {
                 {country.name}
               </MenuItem>
             ))}
+            <MenuItem key={'test'} value={'test'}>
+              test
+            </MenuItem>
           </Select>
           <Button variant="contained" onClick={changeCountryPost}>
             Switch VPN
