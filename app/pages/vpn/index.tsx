@@ -29,7 +29,6 @@ export default function index() {
     if (data) {
       toast('Loaded Country List', {autoClose: 1000, type: 'success'});
       setCountries(data.countries);
-      console.log(data.countries);
     }
   }, [error, data]);
 
@@ -38,7 +37,7 @@ export default function index() {
   };
 
   const changeCountryPost = () => {
-    const response = fetch('/api/vp', {
+    const response = fetch('/api/vpn', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
