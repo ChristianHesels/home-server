@@ -9,4 +9,5 @@ export interface CountryListResponse {
 
 export interface CountryResponse {
   country: string;
+  error?: string;
 }

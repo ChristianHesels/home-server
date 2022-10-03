@@ -14,5 +14,7 @@ export default async (
       'utf8'
     );
     res.status(200).json(JSON.parse(nordVPNCountries));
+  } else if (req.method === 'POST') {
+    res.status(400).json({countries: [{name: '', code: ''}]});
   }
 };

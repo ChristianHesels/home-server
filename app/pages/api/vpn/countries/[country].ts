@@ -5,19 +5,24 @@ import {CountryResponse} from '../../../../interfaces/country';
 export default (req: NextApiRequest, res: NextApiResponse<CountryResponse>) => {
   if (req.method === 'POST') {
     const country = req.query.country;
-    if (typeof country !== 'string') {
-      res.status(400);
+    if (typeof country !== 'string' || country === '') {
+      console.log(country);
+      res
+        .status(400)
+        .json({country: '', error: 'Country is empty or not a string'});
     } else {
       if (country !== 'test') {
-        exec('./scripts/switch_vpn.sh ' + country, error => {
+        exec('./scripts/switch_vpn.sh ' + country, {timeout: 5000}, error => {
           if (error !== null) {
-            res.status(400);
+            res.status(400).json({
+              country: country,
+              error: 'Could not switch VPN (NordVPN Cli installed?)',
+            });
           } else {
             res.status(200).json({country: country});
           }
         });
       }
-      res.status(200).json({country: country});
     }
   }
 };
