@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
-import {Button, FormControl, Paper} from '@mui/material';
+import {Button, FormControl, Grid, Paper} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
@@ -58,7 +58,7 @@ export default function Index() {
     });
 
   const reconnectPost = () =>
-    fetch('/api/vpn/', {
+    fetch('/api/vpn/connect/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,6 +72,28 @@ export default function Index() {
       } else {
         response.json().then(() =>
           toast('VPN Reconnected', {
+            autoClose: 1000,
+            type: 'success',
+          })
+        );
+      }
+    });
+
+  const disconnectPost = () =>
+    fetch('/api/vpn/disconnect/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => {
+      if (!response.ok) {
+        toast('Error disconnecting VPN', {
+          autoClose: 1000,
+          type: 'error',
+        });
+      } else {
+        response.json().then(() =>
+          toast('VPN Disconnected', {
             autoClose: 1000,
             type: 'success',
           })
@@ -102,12 +124,17 @@ export default function Index() {
               test
             </MenuItem>
           </Select>
-          <Button variant="contained" onClick={changeCountryPost}>
-            Switch VPN
-          </Button>
-          <Button variant="contained" onClick={reconnectPost}>
-            Reconnect
-          </Button>
+          <Grid container>
+            <Button variant="contained" onClick={changeCountryPost}>
+              Switch VPN
+            </Button>
+            <Button variant="contained" onClick={reconnectPost}>
+              Reconnect
+            </Button>
+            <Button variant="contained" onClick={disconnectPost}>
+              Disconnect
+            </Button>
+          </Grid>
         </FormControl>
       </Paper>
     </div>

@@ -5,9 +5,9 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     exec('nordvpn connect', error => {
       if (error !== null) {
-        res.status(400);
+        res.status(400).json({status: 'error'});
       } else {
-        res.status(200);
+        res.status(200).json({status: 'ok'});
       }
     });
   }
