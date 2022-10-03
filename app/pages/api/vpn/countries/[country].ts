@@ -11,7 +11,7 @@ export default (req: NextApiRequest, res: NextApiResponse<CountryResponse>) => {
         .json({country: '', error: 'Country is empty or not a string'});
     } else {
       if (country !== 'test') {
-        exec('./scripts/switch_vpn.sh ' + country, {timeout: 10000}, error => {
+        exec('./scripts/switch_vpn.sh ' + country, error => {
           if (error !== null) {
             res.status(400).json({
               country: country,
