@@ -82,6 +82,7 @@ The repository can be executed directly on the device. So if you only want to ex
    ```
 2. Install NPM packages
    ```sh
+   cd app
    npm install
    ```
 3. Build the Next.JS app
@@ -89,8 +90,16 @@ The repository can be executed directly on the device. So if you only want to ex
    npm run build
    ```
 4. Start the Server _this will start the application on http://localhost:3000_
+
    ```sh
    npm run start
+   ```
+
+5. Build and start the CMS (Strapi)
+   ```sh
+   cd ..
+   docker-compose build
+   docker-compose up
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
