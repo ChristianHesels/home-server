@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import useSWR from 'swr';
 import MenuItem from '@mui/material/MenuItem';
-import {Button, FormControl, Grid, Paper} from '@mui/material';
+import {Box, Button, FormControl, Grid} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
@@ -103,28 +103,31 @@ export default function VPN() {
 
   return (
     <div>
-      <Paper className={styles.paper}>
+      <Box className={styles.box}>
         <h1> VPN Controller</h1>
-        <FormControl variant="filled" sx={{m: 1, minWidth: 120}}>
-          <Select
-            labelId="select-country-id"
-            id="select-country"
-            color="secondary"
-            value={country}
-            label="Country"
-            onChange={handleChange}
-            className={styles.select}
-          >
-            {countries?.map(country => (
-              <MenuItem key={country.code} value={country.code}>
-                {country.name}
+
+        <Grid container direction={'column'} spacing={2}>
+          <Grid item>
+            <Select
+              labelId="select-country-id"
+              id="select-country"
+              color="secondary"
+              value={country}
+              label="Country"
+              onChange={handleChange}
+              className={styles.select}
+            >
+              {countries?.map(country => (
+                <MenuItem key={country.code} value={country.code}>
+                  {country.name}
+                </MenuItem>
+              ))}
+              <MenuItem key={'test'} value={'test'}>
+                test
               </MenuItem>
-            ))}
-            <MenuItem key={'test'} value={'test'}>
-              test
-            </MenuItem>
-          </Select>
-          <Grid container>
+            </Select>
+          </Grid>
+          <Grid item>
             <Button variant="contained" onClick={changeCountryPost}>
               Switch VPN
             </Button>
@@ -135,8 +138,8 @@ export default function VPN() {
               Disconnect
             </Button>
           </Grid>
-        </FormControl>
-      </Paper>
+        </Grid>
+      </Box>
     </div>
   );
 }

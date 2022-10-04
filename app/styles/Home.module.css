@@ -1,4 +1,4 @@
-.paper {
+.box {
   background-color: #1d1d1f;
   color: white;
 
@@ -6,13 +6,12 @@
   flex: 1;
   min-height: 100vh;
   display: flex;
-  padding-left: 15px;
+  padding-left: 90px;
   padding-right: 15px;
   text-align: justify;
   padding-bottom: 30px;
   flex-direction: column;
   justify-content: top;
-  align-items: center;
 }
 
 .footer {
@@ -133,7 +132,6 @@
 
 .select {
     color: white;
-    
 }
 
 .select::before {
