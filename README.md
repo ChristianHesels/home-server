@@ -58,8 +58,7 @@ One disadvantage is the management of this VPN connection. If you want to change
 
 ### Built With
 
-- [![Next][next.js]][next-url]
-- [![React][react.js]][react-url]
+- TODO: Add Next.js, React, Strapi, PostgreSQL
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,6 +207,8 @@ rm -rf $TARGET
 mv $TMP $TARGET
 cd $TARGET/app
 pm2 restart homeserver
+cd ..
+docker-compose up -d
 ```
 
 ### NGINX
