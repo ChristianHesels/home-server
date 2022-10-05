@@ -140,9 +140,10 @@ For Deployment I used git Hooks, pm2 and NGINX on the Raspberry Pi.
 First create the initial service by cloning the repository inside the /srv/deploy/ folder, build and execute it with pm2
 
 ```sh
+sudo mkdir -p /srv/deploy/
 PROJECT_DIR=/srv/deploy/homeserver
 # Get the repository
-git clone git@github.com:ChristianHesels/Home-Server.git /srv/deploy/homeserver
+git clone git@github.com:ChristianHesels/Home-Server.git $PROJECT_DIR
 
 
 # Strapi
@@ -197,7 +198,7 @@ sudo touch post-receive
 sudo chmod +x post-receive
 ```
 
-Add the following content to the post-receive file
+Add the following content to the post-receive file. Make sure to add the correct values to the .env file depending on your postgresql configuration.
 
 ```
 #!/bin/sh
@@ -212,19 +213,32 @@ mkdir -p $TMP
 git --work-tree=$TMP --git-dir=$REPO checkout -f
 
 cd $TMP/app
-ls
-# Deploy code comes here
-npm install
-npm run build
+
+# Install Next.js dependencies and build App
+yarn install
+yarn build
+
+cd $TMP/cms
+touch .env
+echo DATABASE_CLIENT=postgres >> .env
+echo DATABASE_NAME=strapi >>.env
+echo DATABASE_HOST=127.0.0.1 >> .env
+echo DATABASE_PORT=5432 >> .env
+echo DATABASE_USERNAME=postgres >> .env
+echo DATABASE_PASSWORD=supersecret >> .env
+
+# Install Strapi dependencies and build strapi
+yarn install
+NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production yarn build --no-optimization
 
 # Replace production directory with temporary directory
 cd /
-rm -rf $TARGET
+sudo rm -rf $TARGET
 mv $TMP $TARGET
-cd $TARGET/app
+
+pm2 restart strapi
 pm2 restart homeserver
-cd ..
-docker-compose up -d
+
 ```
 
 ### NGINX
