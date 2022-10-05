@@ -136,10 +136,22 @@ For Deployment I used git Hooks, pm2 and NGINX on the Raspberry Pi.
 First create the initial service by cloning the repository inside the /srv/deploy/ folder, build and execute it with pm2
 
 ```sh
+PROJECT_DIR=/srv/deploy/homeserver
+# Get the repository
 git clone git@github.com:ChristianHesels/Home-Server.git /srv/deploy/homeserver
-cd app
-npm run build
-pm2 start npm --name "homeserver" -- start
+
+
+# Strapi
+cd $PROJECT_DIR/cms
+yarn install
+NODE_ENV=production yarn build --no-optimization  # --no-optimization is needed for Raspberries with 1 GB RAM
+pm2 start yarn --name "strapi" -- start
+
+# Next.js App
+cd $PROJECT_DIR/app
+yarn install
+yarn build
+pm2 start yarn --name "homeserver" -- start
 ```
 
 Afterwards create a service to run this with pm2 when the pi restarts
