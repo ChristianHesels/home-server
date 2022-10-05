@@ -229,7 +229,7 @@ echo DATABASE_PASSWORD=supersecret >> .env
 
 # Install Strapi dependencies and build strapi
 yarn install
-NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production yarn build --no-optimization
+NODE_ENV=production yarn build --no-optimization
 
 # Replace production directory with temporary directory
 cd /
