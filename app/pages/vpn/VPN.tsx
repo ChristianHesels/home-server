@@ -1,35 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import useSWR from 'swr';
+import React, {useState} from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import {Box, Button, Grid} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
-import {CountryListResponse, Country} from '../../interfaces/country';
+import {VPNProps} from '../../interfaces/vpn';
+import {NextPage} from 'next';
 
-const countryFetcher = (url: string) => fetch(url).then(res => res.json());
-
-export default function VPN() {
+const VPN: NextPage<VPNProps> = ({countries}) => {
   const [country, setCountry] = useState('');
-  const [countries, setCountries] = useState<[Country]>();
-
-  const {data, error} = useSWR<CountryListResponse, Error>(
-    '/api/vpn/countries/',
-    countryFetcher
-  );
-
-  useEffect(() => {
-    if (error) {
-      toast('Failed to load Country list', {
-        autoClose: 3000,
-        type: 'error',
-      });
-    }
-
-    if (data) {
-      setCountries(data.countries);
-    }
-  }, [error, data]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCountry(event.target.value as string);
@@ -142,4 +121,6 @@ export default function VPN() {
       </Box>
     </div>
   );
-}
+};
+
+export default VPN;
