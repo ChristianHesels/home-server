@@ -34,9 +34,9 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
+    <li><a href="#deployment">Deployment</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -104,6 +104,9 @@ The repository can be executed directly on the Raspberry Pi. So if you only want
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- ROADMAP -->
 
 ## Deployment
 
@@ -297,7 +300,6 @@ git push deploy master
 Sources:
 https://francoisromain.medium.com/vps-deploy-with-git-fea605f1303b
 
-<!-- ROADMAP -->
 
 ## Roadmap
 
