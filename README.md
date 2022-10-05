@@ -69,7 +69,7 @@ One disadvantage is the management of this VPN connection. If you want to change
 To configure a Raspberry Pi as RaspAP and using NordVPN on it follow this steps:
 https://vpn-expert.info/vpn-router-raspberry-pi-raspap-and-nordvpn-wi-fi-hotspot-access-point/
 
-Also it is important to have docker and docker-compose installed on the Raspberry Pi.
+Also it is important to have postgresql installed and configured.
 
 ### Prerequisites
 
