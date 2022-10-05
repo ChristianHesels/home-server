@@ -34,9 +34,9 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
+    <li><a href="#deployment">Deployment</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -69,7 +69,7 @@ One disadvantage is the management of this VPN connection. If you want to change
 To configure a Raspberry Pi as RaspAP and using NordVPN on it follow this steps:
 https://vpn-expert.info/vpn-router-raspberry-pi-raspap-and-nordvpn-wi-fi-hotspot-access-point/
 
-Also it is important to have docker and docker-compose installed on the Raspberry Pi.
+Also it is important to have postgresql installed and configured.
 
 ### Prerequisites
 
@@ -105,15 +105,19 @@ The repository can be executed directly on the Raspberry Pi. So if you only want
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- ROADMAP -->
+
 ## Deployment
 
 For Deployment I used git Hooks, pm2 and NGINX on the Raspberry Pi.
 
-1. Install Node.js
+1. Install Node.js and yarn
 
    ```sh
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install nodejs
+   npm install --global yarn
    ```
 
 2. Install pm2 on the device (globally)
@@ -136,10 +140,23 @@ For Deployment I used git Hooks, pm2 and NGINX on the Raspberry Pi.
 First create the initial service by cloning the repository inside the /srv/deploy/ folder, build and execute it with pm2
 
 ```sh
-git clone git@github.com:ChristianHesels/Home-Server.git /srv/deploy/homeserver
-cd app
-npm run build
-pm2 start npm --name "homeserver" -- start
+sudo mkdir -p /srv/deploy/
+PROJECT_DIR=/srv/deploy/homeserver
+# Get the repository
+git clone git@github.com:ChristianHesels/Home-Server.git $PROJECT_DIR
+
+
+# Strapi
+cd $PROJECT_DIR/cms
+yarn install
+NODE_ENV=production yarn build --no-optimization  # --no-optimization is needed for Raspberries with 1 GB RAM
+pm2 start yarn --name "strapi" -- start
+
+# Next.js App
+cd $PROJECT_DIR/app
+yarn install
+yarn build
+pm2 start yarn --name "homeserver" -- start
 ```
 
 Afterwards create a service to run this with pm2 when the pi restarts
@@ -181,7 +198,7 @@ sudo touch post-receive
 sudo chmod +x post-receive
 ```
 
-Add the following content to the post-receive file
+Add the following content to the post-receive file. Make sure to add the correct values to the .env file depending on your postgresql configuration.
 
 ```
 #!/bin/sh
@@ -196,19 +213,32 @@ mkdir -p $TMP
 git --work-tree=$TMP --git-dir=$REPO checkout -f
 
 cd $TMP/app
-ls
-# Deploy code comes here
-npm install
-npm run build
+
+# Install Next.js dependencies and build App
+yarn install
+yarn build
+
+cd $TMP/cms
+touch .env
+echo DATABASE_CLIENT=postgres >> .env
+echo DATABASE_NAME=strapi >>.env
+echo DATABASE_HOST=127.0.0.1 >> .env
+echo DATABASE_PORT=5432 >> .env
+echo DATABASE_USERNAME=postgres >> .env
+echo DATABASE_PASSWORD=supersecret >> .env
+
+# Install Strapi dependencies and build strapi
+yarn install
+NODE_ENV=production yarn build --no-optimization
 
 # Replace production directory with temporary directory
 cd /
-rm -rf $TARGET
+sudo rm -rf $TARGET
 mv $TMP $TARGET
-cd $TARGET/app
+
+pm2 restart strapi
 pm2 restart homeserver
-cd ..
-docker-compose up -d
+
 ```
 
 ### NGINX
@@ -285,7 +315,6 @@ git push deploy master
 Sources:
 https://francoisromain.medium.com/vps-deploy-with-git-fea605f1303b
 
-<!-- ROADMAP -->
 
 ## Roadmap
 
