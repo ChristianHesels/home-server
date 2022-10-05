@@ -112,11 +112,12 @@ The repository can be executed directly on the Raspberry Pi. So if you only want
 
 For Deployment I used git Hooks, pm2 and NGINX on the Raspberry Pi.
 
-1. Install Node.js
+1. Install Node.js and yarn
 
    ```sh
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install nodejs
+   npm install --global yarn
    ```
 
 2. Install pm2 on the device (globally)
