@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import {exec} from 'child_process'; // use exec to execute VPN Switch Script
-import {CountryResponse} from '../../../../interfaces/country';
+import {CountryResponse} from '../../../../interfaces/vpn';
 
 export default (req: NextApiRequest, res: NextApiResponse<CountryResponse>) => {
   if (req.method === 'POST') {
