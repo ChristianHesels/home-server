@@ -38,10 +38,10 @@ export default function Login() {
       .then(resJson => {
         if (resJson) {
           setUser(resJson);
+          Router.push('/');
         } else {
           setUser(null);
         }
-        Router.push('/');
       })
       .catch(res => {
         const error = res as ApiError;
