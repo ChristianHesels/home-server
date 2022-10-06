@@ -7,6 +7,8 @@ import {ToastContainer} from 'react-toastify';
 import createEmotionCache from '../utils/createEmotionCache';
 import {CacheProvider, EmotionCache} from '@emotion/react';
 import styles from '../styles/Home.module.css';
+import useUser from '../lib/useUser';
+import FullPageLoader from '../components/FullPageLoader';
 
 const theme = createTheme({
   palette: {
@@ -36,11 +38,17 @@ function MyApp({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: AppPropsWithCache) {
+  const {user, error} = useUser();
+
+  if (!user && !error) {
+    return <FullPageLoader />;
+  }
+
   return (
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <AppBar />
+          <AppBar isLoggedIn={user ? true : false} />
           <Component {...pageProps} />
           <footer className={styles.footer}>© Christian Hesels 2022</footer>
         </ThemeProvider>

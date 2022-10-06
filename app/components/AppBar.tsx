@@ -14,7 +14,7 @@ const navItems = [
   {name: 'IP-Tables', link: '/iptable'},
 ];
 
-export default function AppBar() {
+export default function AppBar(props: {isLoggedIn: boolean}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const listId = useId();
 
@@ -26,33 +26,54 @@ export default function AppBar() {
     <Box sx={{display: 'flex'}}>
       <MuiAppBar position="sticky" component="nav">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{mr: 2, display: {sm: 'none'}}}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{display: {xs: 'none', sm: 'block'}}}>
-            {navItems.map(item => (
-              <Link key={listId + item.name} href={item.link}>
-                <Button sx={{color: '#fff'}}>{item.name}</Button>
-              </Link>
-            ))}
-          </Box>
-          <Drawer open={mobileOpen} onClose={() => setMobileOpen(false)}>
-            <List key={listId + 'mobile'}>
-              {navItems.map(item => (
-                <Link key={listId + 'mobile' + item.name} href={item.link}>
-                  <ListItem button onClick={handleDrawerToggle}>
-                    <ListItemText>{item.name}</ListItemText>
-                  </ListItem>
+          {props.isLoggedIn ? (
+            <>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{mr: 2, display: {sm: 'none'}}}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Box sx={{display: {xs: 'none', sm: 'block'}}}>
+                {navItems.map(item => (
+                  <Link key={listId + item.name} href={item.link}>
+                    <Button sx={{color: '#fff'}}>{item.name}</Button>
+                  </Link>
+                ))}
+              </Box>
+
+              <Box sx={{flexGrow: 1}} />
+              <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                <Link key={'logout'} href={'/logout'}>
+                  <Button
+                    sx={{
+                      color: '#fff',
+                    }}
+                  >
+                    Logout
+                  </Button>
                 </Link>
-              ))}
-            </List>
-          </Drawer>
+              </Box>
+
+              <Drawer open={mobileOpen} onClose={() => setMobileOpen(false)}>
+                <List key={listId + 'mobile'}>
+                  {navItems.map(item => (
+                    <Link key={listId + 'mobile' + item.name} href={item.link}>
+                      <ListItem button onClick={handleDrawerToggle}>
+                        <ListItemText>{item.name}</ListItemText>
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </Drawer>
+            </>
+          ) : (
+            <div></div>
+          )}
         </Toolbar>
       </MuiAppBar>
     </Box>
