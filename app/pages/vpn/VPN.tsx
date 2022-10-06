@@ -5,7 +5,7 @@ import {Box, Button, Grid} from '@mui/material';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
-import {CountryListResponse, Country} from '../../interfaces/country';
+import {CountryListResponse, Country} from '../../interfaces/vpn';
 
 const countryFetcher = (url: string) => fetch(url).then(res => res.json());
 

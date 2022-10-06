@@ -3,7 +3,7 @@ export interface Country {
   code: string;
 }
 
-export interface VPNProps {
+export interface CountryListResponse {
   countries?: [Country]; // Response for GET request - return all available countries
 }
 
