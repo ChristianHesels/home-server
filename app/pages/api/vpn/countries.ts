@@ -1,12 +1,9 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {CountryListResponse} from '../../../interfaces/country';
+import {VPNProps} from '../../../interfaces/vpn';
 import path from 'path';
 import {promises as fs} from 'fs';
 
-export default async (
-  req: NextApiRequest,
-  res: NextApiResponse<CountryListResponse>
-) => {
+export default async (req: NextApiRequest, res: NextApiResponse<VPNProps>) => {
   if (req.method === 'GET') {
     const jsonDirectory = path.join(process.cwd(), 'json');
     const nordVPNCountries = await fs.readFile(
