@@ -6,12 +6,15 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import {toast} from 'react-toastify';
 import styles from '../../styles/Home.module.css';
 import {CountryListResponse, Country} from '../../interfaces/vpn';
+import useUser from '../../lib/useUser';
+import FullPageLoader from '../../components/FullPageLoader';
 
 const countryFetcher = (url: string) => fetch(url).then(res => res.json());
 
 export default function VPN() {
   const [country, setCountry] = useState('');
   const [countries, setCountries] = useState<[Country]>();
+  const {user} = useUser({redirectTo: '/login'});
 
   const {data, error} = useSWR<CountryListResponse, Error>(
     '/api/vpn/countries/',
@@ -100,6 +103,10 @@ export default function VPN() {
         );
       }
     });
+
+  if (!user) {
+    return <FullPageLoader />;
+  }
 
   return (
     <div>

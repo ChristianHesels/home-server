@@ -31,13 +31,13 @@ export default function useUser({
   useEffect(() => {
     if (
       // If redirectTo is set, redirect if the user was not found.
-      (redirectTo && !redirectIfFound && error) ||
+      (redirectTo && !redirectIfFound && !data) ||
       // If redirectIfFound is also set, redirect if the user was found
-      (redirectIfFound && !error)
+      (redirectIfFound && data)
     ) {
       Router.push(redirectTo);
     }
-  }, [redirectIfFound, redirectTo, error]);
+  }, [redirectIfFound, redirectTo, data]);
 
   return {user: data, error: error};
 }

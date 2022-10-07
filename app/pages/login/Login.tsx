@@ -13,9 +13,13 @@ import useUserStore from '../../zustand/UserStore';
 import {ApiError} from '../../interfaces/api';
 import {toast} from 'react-toastify';
 import Router from 'next/router';
+import FullPageLoader from '../../components/FullPageLoader';
+import useUser from '../../lib/useUser';
 
 export default function Login() {
-  const {setUser} = useUserStore();
+  const {setUser, user: storeUser} = useUserStore();
+
+  const {user, error} = useUser({redirectTo: '/', redirectIfFound: true});
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,6 +55,10 @@ export default function Login() {
         });
       });
   };
+  if (storeUser || (!user && !error)) {
+    console.log(storeUser);
+    return <FullPageLoader />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
