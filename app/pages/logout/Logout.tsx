@@ -8,9 +8,11 @@ const Logout = () => {
   const {setUser} = useUserStore();
   useEffect(() => {
     setUser(null);
+
+    const forwardToLogin = setTimeout(() => Router.push('/login'), 5000);
+    return () => clearTimeout(forwardToLogin);
   }, [setUser]);
 
-  setTimeout(() => Router.push('/login'), 2000);
   return <Box className={styles.box}>You have been logged out</Box>;
 };
 

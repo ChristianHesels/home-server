@@ -43,6 +43,7 @@ export default function VPN() {
     setIsLoading(true);
     await fetch('/api/vpn/countries/' + country, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -92,6 +93,7 @@ export default function VPN() {
   const disconnectPost = async () => {
     setIsLoading(true);
     await fetch('/api/vpn/disconnect/', {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
