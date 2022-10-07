@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import Router from 'next/router';
 import useSWR from 'swr';
 import {cms} from '../config';
-import {User, UserResponse} from '../interfaces/user';
+import {UserResponse} from '../interfaces/user';
 import useUserStore from '../zustand/UserStore';
 
 const fetcher = (url: string, token: string) =>

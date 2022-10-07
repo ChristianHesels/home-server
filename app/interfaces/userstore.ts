@@ -1,6 +1,6 @@
-import {User} from './user';
+import {UserLoginResponse} from './user';
 
 export interface UserStore {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: UserLoginResponse | null;
+  setUser: (user: UserLoginResponse | null) => void;
 }
