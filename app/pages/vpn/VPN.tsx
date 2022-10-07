@@ -12,6 +12,7 @@ import FullPageLoader from '../../components/FullPageLoader';
 const countryFetcher = (url: string) => fetch(url).then(res => res.json());
 
 export default function VPN() {
+  const [isLoading, setIsLoading] = useState(false);
   const [country, setCountry] = useState('');
   const [countries, setCountries] = useState<[Country]>();
   const {user} = useUser({redirectTo: '/login'});
@@ -38,8 +39,9 @@ export default function VPN() {
     setCountry(event.target.value as string);
   };
 
-  const changeCountryPost = () =>
-    fetch('/api/vpn/countries/' + country, {
+  const changeCountryPost = async () => {
+    setIsLoading(true);
+    await fetch('/api/vpn/countries/' + country, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,9 +61,12 @@ export default function VPN() {
         );
       }
     });
+    setIsLoading(false);
+  };
 
-  const reconnectPost = () =>
-    fetch('/api/vpn/connect/', {
+  const reconnectPost = async () => {
+    setIsLoading(true);
+    await fetch('/api/vpn/connect/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,9 +86,12 @@ export default function VPN() {
         );
       }
     });
+    setIsLoading(false);
+  };
 
-  const disconnectPost = () =>
-    fetch('/api/vpn/disconnect/', {
+  const disconnectPost = async () => {
+    setIsLoading(true);
+    await fetch('/api/vpn/disconnect/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,8 +111,10 @@ export default function VPN() {
         );
       }
     });
+    setIsLoading(true);
+  };
 
-  if (!user) {
+  if (!user || isLoading) {
     return <FullPageLoader />;
   }
 
