@@ -7,8 +7,8 @@ import {ToastContainer} from 'react-toastify';
 import createEmotionCache from '../utils/createEmotionCache';
 import {CacheProvider, EmotionCache} from '@emotion/react';
 import styles from '../styles/Home.module.css';
-import useUser from '../lib/useUser';
-import FullPageLoader from '../components/FullPageLoader';
+import useUserStore from '../zustand/UserStore';
+import {useEffect, useState} from 'react';
 
 const theme = createTheme({
   palette: {
@@ -38,17 +38,22 @@ function MyApp({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: AppPropsWithCache) {
-  const {user, error} = useUser();
+  const {user} = useUserStore();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  if (!user && !error) {
-    return <FullPageLoader />;
-  }
+  useEffect(() => {
+    if (user) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [user, setIsAuthenticated]);
 
   return (
     <>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <AppBar isLoggedIn={user ? true : false} />
+          <AppBar isLoggedIn={isAuthenticated} />
           <Component {...pageProps} />
           <footer className={styles.footer}>© Christian Hesels 2022</footer>
         </ThemeProvider>
